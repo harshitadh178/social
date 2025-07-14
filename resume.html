@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f8;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #555;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-top: 6px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #resumePreview {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      white-space: pre-wrap;
+      font-family: 'Courier New', Courier, monospace;
+      line-height: 1.5;
+      margin-top: 20px;
+    }
+    .section-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 15px;
+      border-bottom: 1px solid #007bff;
+      padding-bottom: 5px;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Resume Builder</h1>
+
+<form id="resumeForm">
+  <label for="fullName">Full Name</label>
+  <input type="text" id="fullName" required />
+
+  <label for="email">Email</label>
+  <input type="email" id="email" required />
+
+  <label for="phone">Phone Number</label>
+  <input type="text" id="phone" />
+
+  <label for="address">Address</label>
+  <textarea id="address" placeholder="Street, City, Country"></textarea>
+
+  <label for="summary">Professional Summary</label>
+  <textarea id="summary" placeholder="A brief about yourself"></textarea>
+
+  <label for="education">Education</label>
+  <textarea id="education" placeholder="Degree, Institution, Year"></textarea>
+
+  <label for="experience">Work Experience</label>
+  <textarea id="experience" placeholder="Job Title, Company, Duration, Responsibilities"></textarea>
+
+  <label for="skills">Skills (comma separated)</label>
+  <input type="text" id="skills" placeholder="JavaScript, HTML, CSS, etc." />
+
+  <button type="button" onclick="generateResume()">Generate Resume</button>
+  <button type="button" onclick="downloadResume()">Download Resume</button>
+</form>
+
+<div id="resumePreview" hidden></div>
+
+<script>
+  function generateResume() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const summary = document.getElementById('summary').value.trim();
+    const education = document.getElementById('education').value.trim();
+    const experience = document.getElementById('experience').value.trim();
+    const skills = document.getElementById('skills').value.trim();
+
+    if (!fullName || !email) {
+      alert("Please fill in the required fields: Full Name and Email");
+      return;
+    }
+
+    let resumeText = `${fullName.toUpperCase()}\n`;
+    resumeText += `${email}\n`;
+    if (phone) resumeText += `${phone}\n`;
+    if (address) resumeText += `${address}\n`;
+
+    resumeText += `\n==============================\n`;
+
+    if (summary) {
+      resumeText += `Professional Summary\n------------------------------\n${summary}\n\n`;
+    }
+    if (education) {
+      resumeText += `Education\n------------------------------\n${education}\n\n`;
+    }
+    if (experience) {
+      resumeText += `Work Experience\n------------------------------\n${experience}\n\n`;
+    }
+    if (skills) {
+      resumeText += `Skills\n------------------------------\n${skills.split(',').map(s => s.trim()).join(', ')}\n\n`;
+    }
+
+    const preview = document.getElementById('resumePreview');
+    preview.textContent = resumeText;
+    preview.hidden = false;
+  }
+
+  function downloadResume() {
+    const resumeContent = document.getElementById('resumePreview').textContent;
+    if (!resumeContent) {
+      alert("Please generate your resume first.");
+      return;
+    }
+    const blob = new Blob([resumeContent], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'resume.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+
+</body>
+</html>
