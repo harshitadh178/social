@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - Job Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafc;
+      margin: 0;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .about-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-image {
+      flex: 1 1 300px;
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,123,255,0.2);
+      transition: transform 0.3s ease;
+    }
+    .about-image:hover {
+      transform: scale(1.05);
+    }
+    .about-text {
+      flex: 2 1 400px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .highlight {
+      color: #007bff;
+      font-weight: 600;
+    }
+    .read-more {
+      margin-top: 15px;
+      color: #007bff;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      display: inline-block;
+    }
+    .hidden-text {
+      display: none;
+      margin-top: 15px;
+      color: #555;
+      font-size: 15px;
+    }
+    @media (max-width: 600px) {
+      .about-container {
+        flex-direction: column;
+        padding: 20px;
+      }
+      .about-image, .about-text {
+        max-width: 100%;
+        flex: unset;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>About Us</h1>
+
+  <div class="about-container">
+    <img
+      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80"
+      alt="Team collaboration"
+      class="about-image"
+    />
+
+    <div class="about-text">
+      <p>
+        Welcome to <span class="highlight">JobConnect</span>, your trusted job portal designed to connect talented candidates with top employers worldwide.
+        We believe in bridging the gap between opportunity and talent through a user-friendly and innovative platform.
+      </p>
+      <p class="hidden-text" id="extraText">
+        Our mission is to empower job seekers with the best tools and resources to find their dream jobs, and help companies build outstanding teams that drive success.
+        We offer curated job listings, personalized recommendations, and insightful career advice.
+        Our dedicated support team is here to assist both candidates and recruiters every step of the way.
+      </p>
+      <span class="read-more" id="readMoreBtn">Read More ▼</span>
+    </div>
+  </div>
+
+<script>
+  const readMoreBtn = document.getElementById('readMoreBtn');
+  const extraText = document.getElementById('extraText');
+
+  readMoreBtn.addEventListener('click', () => {
+    if (extraText.style.display === 'block') {
+      extraText.style.display = 'none';
+      readMoreBtn.textContent = 'Read More ▼';
+    } else {
+      extraText.style.display = 'block';
+      readMoreBtn.textContent = 'Read Less ▲';
+    }
+  });
+</script>
+
+</body>
+</html>
