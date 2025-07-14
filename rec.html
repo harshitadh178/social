@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Recommendations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 20px;
+      background: #f9fafd;
+      color: #333;
+    }
+    h1, h2 {
+      color: #007bff;
+      text-align: center;
+    }
+    #recommendations, #likedJobs {
+      margin-top: 20px;
+    }
+    .job-card {
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      transition: box-shadow 0.3s ease;
+    }
+    .job-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .job-title {
+      font-weight: bold;
+      font-size: 18px;
+      color: #007bff;
+      margin-bottom: 5px;
+    }
+    .company {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .description {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 10px;
+      white-space: pre-line;
+    }
+    .btn-group button {
+      padding: 8px 15px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn-like {
+      background-color: #28a745;
+      color: white;
+    }
+    .btn-like:hover {
+      background-color: #218838;
+    }
+    .btn-dismiss {
+      background-color: #dc3545;
+      color: white;
+    }
+    .btn-dismiss:hover {
+      background-color: #c82333;
+    }
+    #likedJobs .job-card {
+      background-color: #e8f5e9;
+    }
+    .no-jobs {
+      text-align: center;
+      color: #777;
+      font-style: italic;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Job Recommendations</h1>
+
+  <section id="recommendations">
+    <h2>Recommended Jobs</h2>
+    <div id="recommendationList"></div>
+  </section>
+
+  <section id="likedJobs">
+    <h2>Liked Jobs</h2>
+    <div id="likedList">
+      <p class="no-jobs">No liked jobs yet.</p>
+    </div>
+  </section>
+
+<script>
+  // Sample job recommendations
+  const jobs = [
+    {
+      id: 1,
+      title: 'Backend Developer',
+      company: 'Innovatech Solutions',
+      description: 'Work on scalable backend services using Node.js and MongoDB.'
+    },
+    {
+      id: 2,
+      title: 'UI/UX Designer',
+      company: 'Creative Minds',
+      description: 'Design engaging user experiences and interfaces for mobile apps.'
+    },
+    {
+      id: 3,
+      title: 'Data Analyst',
+      company: 'Data Insights LLC',
+      description: 'Analyze large datasets and generate actionable insights.'
+    },
+    {
+      id: 4,
+      title: 'Project Manager',
+      company: 'Enterprise Corp',
+      description: 'Lead teams to deliver projects on time and within budget.'
+    }
+  ];
+
+  const recommendationList = document.getElementById('recommendationList');
+  const likedList = document.getElementById('likedList');
+
+  let recommendedJobs = [...jobs]; // clone jobs array
+  let likedJobs = [];
+
+  function renderRecommendations() {
+    recommendationList.innerHTML = '';
+    if (recommendedJobs.length === 0) {
+      recommendationList.innerHTML = '<p class="no-jobs">No more recommendations.</p>';
+      return;
+    }
+    recommendedJobs.forEach(job => {
+      const jobCard = document.createElement('div');
+      jobCard.className = 'job-card';
+      jobCard.innerHTML = `
+        <div class="job-title">${job.title}</div>
+        <div class="company">${job.company}</div>
+        <div class="description">${job.description}</div>
+        <div class="btn-group">
+          <button class="btn-like" onclick="likeJob(${job.id})">Like</button>
+          <button class="btn-dismiss" onclick="dismissJob(${job.id})">Dismiss</button>
+        </div>
+      `;
+      recommendationList.appendChild(jobCard);
+    });
+  }
+
+  function renderLikedJobs() {
+    likedList.innerHTML = '';
+    if (likedJobs.length === 0) {
+      likedList.innerHTML = '<p class="no-jobs">No liked jobs yet.</p>';
+      return;
+    }
+    likedJobs.forEach(job => {
+      const jobCard = document.createElement('div');
+      jobCard.className = 'job-card';
+      jobCard.innerHTML = `
+        <div class="job-title">${job.title}</div>
+        <div class="company">${job.company}</div>
+        <div class="description">${job.description}</div>
+      `;
+      likedList.appendChild(jobCard);
+    });
+  }
+
+  function likeJob(id) {
+    // Move job from recommendedJobs to likedJobs
+    const index = recommendedJobs.findIndex(j => j.id === id);
+    if (index !== -1) {
+      const [job] = recommendedJobs.splice(index, 1);
+      likedJobs.unshift(job);
+      renderRecommendations();
+      renderLikedJobs();
+    }
+  }
+
+  function dismissJob(id) {
+    // Remove job from recommendedJobs
+    recommendedJobs = recommendedJobs.filter(j => j.id !== id);
+    renderRecommendations();
+  }
+
+  // Initial render
+  renderRecommendations();
+  renderLikedJobs();
+</script>
+
+</body>
+</html>
