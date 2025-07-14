@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Portal - Jobs Listing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      margin-top: 6px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .job-list {
+      list-style: none;
+      padding: 0;
+    }
+    .job-item {
+      background: white;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+    .job-item:hover {
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .job-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #007bff;
+      margin-bottom: 6px;
+    }
+    .company {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .job-details {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #444;
+    }
+    .job-meta {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Job Portal - Job Listings</h1>
+
+  <form id="jobForm">
+    <label for="title">Job Title *</label>
+    <input type="text" id="title" required />
+
+    <label for="company">Company *</label>
+    <input type="text" id="company" required />
+
+    <label for="location">Location</label>
+    <input type="text" id="location" placeholder="City, Country" />
+
+    <label for="type">Job Type</label>
+    <select id="type">
+      <option value="Full-time" selected>Full-time</option>
+      <option value="Part-time">Part-time</option>
+      <option value="Contract">Contract</option>
+      <option value="Internship">Internship</option>
+      <option value="Temporary">Temporary</option>
+    </select>
+
+    <label for="salary">Salary (optional)</label>
+    <input type="text" id="salary" placeholder="e.g. $50,000 - $70,000" />
+
+    <label for="description">Job Description *</label>
+    <textarea id="description" required placeholder="Responsibilities, requirements, etc."></textarea>
+
+    <button type="submit">Add Job</button>
+  </form>
+
+  <ul id="jobsList" class="job-list"></ul>
+
+  <script>
+    const jobForm = document.getElementById('jobForm');
+    const jobsList = document.getElementById('jobsList');
+
+    // Sample initial jobs array
+    let jobs = [
+      {
+        title: 'Frontend Developer',
+        company: 'Tech Solutions Inc.',
+        location: 'New York, USA',
+        type: 'Full-time',
+        salary: '$70,000 - $90,000',
+        description: 'Develop and maintain web applications with React.js and JavaScript.'
+      },
+      {
+        title: 'Graphic Designer',
+        company: 'Creative Studio',
+        location: 'Remote',
+        type: 'Contract',
+        salary: '',
+        description: 'Design marketing materials, logos, and branding assets.'
+      }
+    ];
+
+    // Function to render jobs list
+    function renderJobs() {
+      jobsList.innerHTML = '';
+      if (jobs.length === 0) {
+        jobsList.innerHTML = '<p>No jobs posted yet.</p>';
+        return;
+      }
+
+      jobs.forEach((job, index) => {
+        const li = document.createElement('li');
+        li.classList.add('job-item');
+        li.innerHTML = `
+          <div class="job-title">${job.title}</div>
+          <div class="company">${job.company}</div>
+          <div class="job-details">${job.description.replace(/\n/g, '<br>')}</div>
+          <div class="job-meta">
+            <strong>Location:</strong> ${job.location || 'Not specified'} |
+            <strong>Type:</strong> ${job.type} |
+            <strong>Salary:</strong> ${job.salary || 'Negotiable'}
+          </div>
+        `;
+        jobsList.appendChild(li);
+      });
+    }
+
+    // Add job form submit handler
+    jobForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Get form values
+      const newJob = {
+        title: document.getElementById('title').value.trim(),
+        company: document.getElementById('company').value.trim(),
+        location: document.getElementById('location').value.trim(),
+        type: document.getElementById('type').value,
+        salary: document.getElementById('salary').value.trim(),
+        description: document.getElementById('description').value.trim()
+      };
+
+      if (!newJob.title || !newJob.company || !newJob.description) {
+        alert('Please fill in all required fields: Job Title, Company, and Job Description.');
+        return;
+      }
+
+      // Add to jobs array
+      jobs.unshift(newJob);
+
+      // Clear form
+      jobForm.reset();
+
+      // Render updated list
+      renderJobs();
+    });
+
+    // Initial render
+    renderJobs();
+  </script>
+</body>
+</html>
+
+
