@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Job Portal Website</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f6f8;
+    }
+
+    header {
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+    }
+
+    header h1 {
+      font-weight: 600;
+      margin: 0;
+    }
+
+    nav ul {
+      background: white;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    nav ul li {
+      list-style: none;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 15px 20px;
+      color: #2a5298;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      background-color: #f0f0f0;
+      color: #000;
+    }
+
+    .hero {
+      background: url("https://www.jobslink.in/img/about-us.png") no-repeat center center;
+      background-size: cover;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .hero h1 {
+      font-size: 48px;
+    }
+
+    .card-title {
+      font-weight: 600;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      transform: scale(1.02);
+      transition: 0.3s ease;
+    }
+
+    .search-section {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    footer {
+      background: #1e3c72;
+      color: rgb(23, 39, 179);
+    }
+    /* Header Styling */
+    header {
+      text-align: center;
+      padding: 20px;
+      color: white;
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+      animation: gradientShift 5s infinite alternate;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      animation: fadeSlideIn 2s ease-in-out;
+    }
+
+    /* Keyframes for Text Animation */
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Keyframes for Gradient Animation */
+    @keyframes gradientShift {
+      0% {
+        background: linear-gradient(90deg, #1e3c72, #2a5298);
+      }
+      100% {
+        background: linear-gradient(90deg, #2a5298, #1e3c72);
+      }
+    }
+    /* Navigation Styling */
+    nav {
+      background-color: #1e3c72;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideIn 1s ease-out;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    li {
+      margin: 0 15px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+    }
+
+    /* Hover Effect */
+    a:hover {
+      color: #ffcc00;
+    }
+
+    /* Underline Animation */
+    a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: #ffcc00;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s ease-in-out;
+    }
+
+    a:hover::after {
+      width: 100%;
+    }
+
+    /* Slide-In Animation */
+    @keyframes slideIn {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+        /* Search Section Styling */
+        .search-section {
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #1e3c72;
+    }
+
+    input.form-control {
+      border: 2px solid #1e3c72;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input.form-control:focus {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(30, 60, 114, 0.5);
+      outline: none;
+    }
+
+    button.btn-primary {
+      background-color: #1e3c72;
+      border: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button.btn-primary:hover {
+      background-color: #ffcc00;
+      transform: scale(1.1);
+    }
+
+    /* Fade-In Animation */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hover-animate {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-animate:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+    
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="text-white text-center py-4">
+    <h1>Job Search Portal</h1>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <ul class="sticky-top">
+      <li><a href="http://127.0.0.1:5500/project.html">Home</a></li>
+      <li><a href="http://127.0.0.1:5500/jobs.html">Jobs</a></li>
+      <li><a href="http://127.0.0.1:5500/resume.html">Resume Builder</a></li>
+      <li><a href="http://127.0.0.1:5500/rec.html">Recommendations</a></li>
+      <li><a href="http://127.0.0.1:5500/notif.html">Notifications</a></li>
+      <li><a href="http://127.0.0.1:5500/about.html">About Us</a></li>
+      <li><a href="http://127.0.0.1:5500/contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Find Your Dream Job<br />With Us</h1>
+  </section>
+ <!-- Search Section -->
+ <section class="container my-5">
+  <div class="search-section">
+    <h2 class="text-center mb-4">Search for Jobs</h2>
+    <form id="job-search-form">
+      <div class="form-row justify-content-center">
+        <div class="col-md-3 mb-2">
+          <input type="text" class="form-control" id="profession" placeholder="Profession"/>
+        </div>
+        <div class="col-md-3 mb-2">
+          <input type="text" class="form-control" id="location" placeholder="Location"/>
+        </div>
+        <div class="col-md-3 mb-2">
+          <input type="text" class="form-control" id="company" placeholder="Company"/>
+        </div>
+        <div class="col-md-2 mb-2">
+          <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- JavaScript -->
+<script>
+  // Handle form submission
+  document.getElementById('job-search-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get input values
+    const profession = document.getElementById('profession').value;
+    const location = document.getElementById('location').value;
+    const company = document.getElementById('company').value;
+
+    // Display search criteria
+    alert(`Search Criteria:\nProfession: ${profession}\nLocation: ${location}\nCompany: ${company}`);
+  });
+</script>
+
+<!-- Job Categories Section -->
+<section class="container my-5">
+  <h2 class="text-center mb-4" data-aos="fade-up">Explore Job Categories</h2>
+  <div class="row text-center" id="job-category-row">
+    <!-- Cards will be inserted dynamically with JavaScript -->
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 JobPortal. All rights reserved.
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<!-- JavaScript -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    AOS.init(); // Initialize scroll animations
+
+    const categories = [
+      { name: "Technology", jobs: 200 },
+      { name: "Healthcare", jobs: 120 },
+      { name: "Marketing", jobs: 80 },
+      { name: "Finance", jobs: 95 },
+      { name: "Education", jobs: 60 },
+      { name: "Engineering", jobs: 140 },
+      { name: "Legal", jobs: 50 },
+      { name: "Sales", jobs: 110 }
+    ];
+
+    const row = document.getElementById("job-category-row");
+
+    categories.forEach((category, index) => {
+      const col = document.createElement("div");
+      col.className = "col-md-3 mb-4";
+      col.setAttribute("data-aos", "zoom-in");
+      col.setAttribute("data-aos-delay", `${100 * (index + 1)}`);
+
+      col.innerHTML = `
+        <div class="p-4 bg-light shadow-sm rounded hover-animate category-card">
+          <h5>${category.name}</h5>
+          <p>${category.jobs}+ Jobs</p>
+        </div>
+      `;
+
+      // On card click, redirect to a category-based job page (simulated)
+      col.querySelector(".category-card").addEventListener("click", () => {
+        const categorySlug = category.name.toLowerCase();
+        window.location.href = `jobs.html?category=${categorySlug}`;
+      });
+
+      row.appendChild(col);
+    });
+  });
+</script>
+
+
+
+  
+  <!-- Featured Jobs Section -->
+<section class="container my-5">
+  <h2 class="text-center mb-4">Featured Jobs</h2>
+  <div class="row" id="featured-jobs">
+    <!-- Job cards will be added dynamically here -->
+  </div>
+</section>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript to Render Jobs -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const jobs = [
+      {
+        title: "Software Engineer",
+        company: "TechCorp",
+        location: "New Delhi"
+      },
+      {
+        title: "Data Analyst",
+        company: "DataWorks",
+        location: "Chandigarh"
+      },
+      {
+        title: "Project Manager",
+        company: "BuildIt",
+        location: "Bangalore"
+      },
+      {
+        title: "UI/UX Designer",
+        company: "CreativeSoft",
+        location: "Mumbai"
+      },
+      {
+        title: "DevOps Engineer",
+        company: "CloudBridge",
+        location: "Hyderabad"
+      }
+    ];
+
+    const jobsContainer = document.getElementById("featured-jobs");
+
+    jobs.forEach(job => {
+      const col = document.createElement("div");
+      col.className = "col-md-4 mb-4";
+
+      col.innerHTML = `
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${job.title}</h5>
+            <p class="card-text">Company: ${job.company}</p>
+            <p class="card-text">Location: ${job.location}</p>
+            <a href="#" class="btn btn-outline-primary btn-sm mt-auto apply-btn">Apply Now</a>
+          </div>
+        </div>
+      `;
+
+      col.querySelector(".apply-btn").addEventListener("click", function (e) {
+        e.preventDefault();
+        alert(`You clicked apply for ${job.title} at ${job.company}`);
+        // Optionally redirect:
+        // window.location.href = `/apply.html?job=${encodeURIComponent(job.title)}`;
+      });
+
+      jobsContainer.appendChild(col);
+    });
+  });
+</script>
+
+
+
+  <!-- Latest Job Listings Section -->
+<section class="container my-5">
+  <h2 class="text-center mb-4">Latest Job Listings</h2>
+  <div class="row" id="latest-jobs">
+    <!-- Job cards will be injected here by JavaScript -->
+  </div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript to Render Jobs and Handle Apply Button -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const latestJobs = [
+      {
+        title: "Web Developer",
+        company: "Good Faith",
+        location: "Mohali",
+        description: "Good Web Developer"
+      },
+      {
+        title: "Graphic Designer",
+        company: "Web Ninjas",
+        location: "Chandigarh",
+        description: "Creative Graphic Designer Needed"
+      },
+      {
+        title: "Backend Developer",
+        company: "TechCore",
+        location: "Noida",
+        description: "Experienced in Node.js and MongoDB"
+      },
+      {
+        title: "HR Executive",
+        company: "PeopleFirst",
+        location: "Gurgaon",
+        description: "Skilled in recruitment and onboarding"
+      }
+    ];
+
+    const jobContainer = document.getElementById("latest-jobs");
+
+    latestJobs.forEach(job => {
+      const col = document.createElement("div");
+      col.className = "col-md-6";
+
+      col.innerHTML = `
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">${job.title}</h5>
+            <p><strong>Company:</strong> ${job.company}</p>
+            <p><strong>Location:</strong> ${job.location}</p>
+            <p><strong>Description:</strong> ${job.description}</p>
+            <a href="#" class="btn btn-primary btn-sm apply-btn">Apply Now</a>
+          </div>
+        </div>
+      `;
+
+      // Add click event to the Apply Now button
+      col.querySelector(".apply-btn").addEventListener("click", (event) => {
+        event.preventDefault();
+        alert(`Thank you for applying for the ${job.title} position at ${job.company}!`);
+      });
+
+      jobContainer.appendChild(col);
+    });
+  });
+</script>
+
+  <!-- Job Listings Section -->
+  <section class="container my-5">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card p-4">
+          <h5>Backend Developer</h5>
+          <p><strong>Company:</strong> CodeCraft</p>
+          <p><strong>Location:</strong> Chandigarh</p>
+          <p><strong>Description:</strong> Node.js developer with 2+ years of experience in REST APIs and MongoDB.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm apply-btn">Apply Now</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-4">
+          <h5>Human Resource Manager</h5>
+          <p><strong>Company:</strong> StarTech</p>
+          <p><strong>Location:</strong> Mohali</p>
+          <p><strong>Description:</strong> HR with a passion for people development and team building.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm apply-btn">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Subscription Section -->
+  <section class="container my-5">
+    <div class="bg-white p-5 shadow-sm rounded">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h4>Stay Updated With New Jobs</h4>
+          <p>Subscribe to get latest job alerts directly to your inbox.</p>
+        </div>
+        <div class="col-md-6">
+          <form class="input-group newsletter" id="newsletter-form">
+            <input type="email" class="form-control" id="email-input" placeholder="Enter your email" required />
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    // Handle "Apply Now" button clicks
+    document.querySelectorAll('.apply-btn').forEach(button => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        alert('Thank you for your interest! We will contact you soon.');
+      });
+    });
+
+    // Handle newsletter subscription form submission
+    document.getElementById('newsletter-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const emailInput = document.getElementById('email-input');
+      const email = emailInput.value.trim();
+
+      if (email) {
+        alert(`Thank you for subscribing with email: ${email}`);
+        emailInput.value = ''; // Clear the input field
+      } else {
+        alert('Please enter a valid email address.');
+      }
+    });
+  </script>
+
+  <!-- Testimonials -->
+<section class="container my-5">
+  <h2 class="text-center mb-4">What Users Say</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <blockquote class="blockquote bg-white p-4 shadow-sm rounded">
+        <p>"I landed my dream job within a week. Highly recommend!"</p>
+        <footer class="blockquote-footer">Anjali, Web Developer</footer>
+      </blockquote>
+    </div>
+    <div class="col-md-4">
+      <blockquote class="blockquote bg-white p-4 shadow-sm rounded">
+        <p>"Great platform with real job listings."</p>
+        <footer class="blockquote-footer">Raj, Data Analyst</footer>
+      </blockquote>
+    </div>
+    <div class="col-md-4">
+      <blockquote class="blockquote bg-white p-4 shadow-sm rounded">
+        <p>"Their resume builder is a game changer."</p>
+        <footer class="blockquote-footer">Priya, HR Manager</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-dark text-white py-4">
+  <div class="container text-center">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <h5>Job Portal</h5>
+        <p>Connecting talent with opportunities.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="http://127.0.0.1:5500/project.html" class="text-white text-decoration-none">Home</a></li>
+          <li><a href="http://127.0.0.1:5500/jobs.html" class="text-white text-decoration-none">Jobs</a></li>
+          <li><a href="http://127.0.0.1:5500/contact.html" class="text-white text-decoration-none">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 social-icons">
+      <h5>Follow Us</h5>
+      <a href="https://facebook.com" class="text-white me-3" target="_blank"><i class="bi bi-facebook"></i></a>
+      <a href="https://twitter.com" class="text-white me-3" target="_blank"><i class="bi bi-twitter"></i></a>
+      <a href="https://linkedin.com" class="text-white" target="_blank"><i class="bi bi-linkedin"></i></a>
+    </div>
+    </div>
+    <p class="mb-0">© 2025 Job Search Portal. All rights reserved.</p>
+  </div>
+</footer>
+
+   
+  <!-- Login -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="authModalLabel">Login to Your Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="login-form">
+          <div class="mb-3">
+            <label for="login-email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="login-email" required />
+          </div>
+          <div class="mb-3">
+            <label for="login-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="login-password" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Login is a placeholder. Implement backend authentication.');
+  });
+</script>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800, // animation duration
+    once: true     // whether animation should happen only once
+  });
+</script>
+
+
+
+</body>
+</html>
